@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TeamToyTool.Data
+{
+    class User
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+
+        public List<ToDo> mToDoList { get; set; }
+
+        public User(int id, string name)
+        {
+            this.id = id;
+            this.name = name;
+
+            mToDoList = new List<ToDo>();
+        }
+
+        public void addTodo(ToDo todo)
+        {
+            mToDoList.Add(todo);
+        }
+    }
+}
