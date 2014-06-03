@@ -15,9 +15,6 @@ namespace TeamToyTool
         static void Main(string[] args)
         {
             SqlManager sqlManager = new SqlManager();
-            sqlManager.getUsers();
-            sqlManager.getToDoForEachUser();
-            sqlManager.getCommentForEachToDo();
         }
     }
 }

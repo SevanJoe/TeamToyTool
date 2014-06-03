@@ -25,5 +25,21 @@ namespace TeamToyTool.Data
         {
             mToDoList.Add(todo);
         }
+
+        public List<ToDo> getValidatedToDoList(int month)
+        {
+            List<ToDo> result = new List<ToDo>();
+            foreach (ToDo todo in mToDoList)
+            {
+                if (todo.isTimeSet)
+                {
+                    if (todo.month == month)
+                    {
+                        result.Add(todo);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

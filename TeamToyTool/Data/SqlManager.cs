@@ -25,9 +25,14 @@ namespace TeamToyTool.Data
 
         public SqlManager()
         {
-            createConnection();
-
             mDataManager = new DataManager();
+
+            createConnection();
+            getUsers();
+            getToDoForEachUser();
+            getCommentForEachToDo();
+
+            ExcelManager excelManager = new ExcelManager(mDataManager);
         }
 
         private void createConnection()
@@ -114,7 +119,8 @@ namespace TeamToyTool.Data
                             todo.addComment(comment);
                         }
                         todo.validateScore();
-                        Console.WriteLine(user.name + ": " + todo.score + "分， " + todo.content);
+                        todo.validateDate();
+                        Console.WriteLine(user.name + ": " + todo.month + "." + todo.day + " " + todo.score + "分， " + todo.content);
                         mDataReader.Close();
                     }
                 }

@@ -14,12 +14,14 @@ namespace TeamToyTool.Data
         public int owner_uid { get; set; }
         public int comment_count { get; set; }
         public int score { get; set; }
-        public bool isTimeSet { get; set; };
-        public DateTime mDateTime { get; set; }
+        public bool isScoreSet { get; set; }
+        public bool isTimeSet { get; set; }
+        public int month { get; set; }
+        public int day { get; set; }
 
         public List<Comment> mComments { get; set; }
 
-        private static readonly Regex mRegex = new Regex("[[01][]0-9].[0-5][0-9]]");
+        private static readonly Regex mRegex = new Regex("[0-9]{1,2}.[0-9]{1,2}");
 
         public ToDo(int id, string content, int owner_id, int comment_count)
         {
@@ -28,6 +30,7 @@ namespace TeamToyTool.Data
             this.owner_uid = owner_uid;
             this.comment_count = comment_count;
             score = 0;
+            isScoreSet = false;
             isTimeSet = false;
 
             mComments = new List<Comment>();
@@ -51,23 +54,23 @@ namespace TeamToyTool.Data
                         if (int.TryParse(value, out tempScore))
                         {
                             score = tempScore;
+                            isScoreSet = true;
                         }
                     }
                 }
             }
         }
 
-        public void validateTime()
+        public void validateDate()
         {
             Match match = mRegex.Match(content);
-            if(match.Success)
+            if(match.Success && content.Substring(0, 1).Equals("["))
             {
                 isTimeSet = true;
                 string dateString = content.Substring(1, content.IndexOf(']') - 1);
                 int indexOfDot = dateString.IndexOf('.');
-                int month = int.Parse(dateString.Substring(0, indexOfDot));
-                int year = int.Parse(dateString.Substring(indexOfDot, dateString.Length - indexOfDot - 1));
-                mDateTime = new DateTime(DateTime.Now.Year, month, year);
+                month = int.Parse(dateString.Substring(0, indexOfDot));
+                day = int.Parse(dateString.Substring(indexOfDot + 1, dateString.Length - indexOfDot - 1));
             }
         }
 
