@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TeamToyTool.Data
@@ -13,8 +14,12 @@ namespace TeamToyTool.Data
         public int owner_uid { get; set; }
         public int comment_count { get; set; }
         public int score { get; set; }
+        public bool isTimeSet { get; set; };
+        public DateTime mDateTime { get; set; }
 
         public List<Comment> mComments { get; set; }
+
+        private static readonly Regex mRegex = new Regex("[[01][]0-9].[0-5][0-9]]");
 
         public ToDo(int id, string content, int owner_id, int comment_count)
         {
@@ -23,6 +28,7 @@ namespace TeamToyTool.Data
             this.owner_uid = owner_uid;
             this.comment_count = comment_count;
             score = 0;
+            isTimeSet = false;
 
             mComments = new List<Comment>();
         }
@@ -48,6 +54,20 @@ namespace TeamToyTool.Data
                         }
                     }
                 }
+            }
+        }
+
+        public void validateTime()
+        {
+            Match match = mRegex.Match(content);
+            if(match.Success)
+            {
+                isTimeSet = true;
+                string dateString = content.Substring(1, content.IndexOf(']') - 1);
+                int indexOfDot = dateString.IndexOf('.');
+                int month = int.Parse(dateString.Substring(0, indexOfDot));
+                int year = int.Parse(dateString.Substring(indexOfDot, dateString.Length - indexOfDot - 1));
+                mDateTime = new DateTime(DateTime.Now.Year, month, year);
             }
         }
 
