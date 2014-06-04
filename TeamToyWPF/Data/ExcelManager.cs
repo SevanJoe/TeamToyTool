@@ -29,46 +29,54 @@ namespace TeamToyWPF.Data
 
         public bool execute()
         {
-            mApplication = new Application();
-            object Nothing = Missing.Value;
-            mWorkbook = mApplication.Workbooks.Open(mFilePath, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing);
-            mApplication.DisplayAlerts = false;
-            mApplication.AlertBeforeOverwriting = false;
-
-            foreach (User user in mDataManager.mUsers)
+            try
             {
-                switch (user.name)
+                mApplication = new Application();
+                object Nothing = Missing.Value;
+                mWorkbook = mApplication.Workbooks.Open(mFilePath, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing);
+                mApplication.DisplayAlerts = false;
+                mApplication.AlertBeforeOverwriting = false;
+
+                foreach (User user in mDataManager.mUsers)
                 {
-                    case "胡蓉":
-                        saveSheet(user, 1);
-                        break;
-                    case "杨斌":
-                        saveSheet(user, 2);
-                        break;
-                    case "焦磊":
-                        saveSheet(user, 3);
-                        break;
-                    case "黄琛":
-                        saveSheet(user, 3, 1);
-                        break;
-                    case "胡鹏飞":
-                        saveSheet(user, 4);
-                        break;
-                    case "刘晓云":
-                        saveSheet(user, 5);
-                        break;
-                    default:
-                        break;
+                    switch (user.name)
+                    {
+                        case "胡蓉":
+                            saveSheet(user, 1);
+                            break;
+                        case "杨斌":
+                            saveSheet(user, 2);
+                            break;
+                        case "焦磊":
+                            saveSheet(user, 3);
+                            break;
+                        case "黄琛":
+                            saveSheet(user, 3, 1);
+                            break;
+                        case "胡鹏飞":
+                            saveSheet(user, 4);
+                            break;
+                        case "刘晓云":
+                            saveSheet(user, 5);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
+                mWorkbook.Save();
+                mApplication.Quit();
+                mWorksheet = null;
+                mWorkbook = null;
+                mApplication = null;
+
+                return true;
             }
-
-            mWorkbook.Save();
-            mApplication.Quit();
-            mWorksheet = null;
-            mWorkbook = null;
-            mApplication = null;
-
-            return true;
+            catch (Exception e)
+            {
+                new MessageManager().showError(e.Message);
+                return false;
+            }
         }
 
         private void saveSheet(User user, int sheetIndex, int userIndex = 0)

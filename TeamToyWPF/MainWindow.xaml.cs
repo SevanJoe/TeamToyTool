@@ -94,7 +94,15 @@ namespace TeamToyWPF
                 mStatusText.Dispatcher.Invoke(new Action(() =>
                 {
                     mStatusText.Text = "导出成功！";
-                    System.Windows.MessageBox.Show("导出成功！", "Excel 导出", MessageBoxButton.OK);
+                    new MessageManager().showMessage("导出成功！", "Excel 导出");
+                }));
+            }
+            else
+            {
+                mStatusText.Dispatcher.Invoke(new Action(() =>
+                {
+                    mStatusText.Text = "导出失败！";
+                    new MessageManager().showError("导出失败！");
                 }));
             }
         }

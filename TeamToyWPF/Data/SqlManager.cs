@@ -51,7 +51,7 @@ namespace TeamToyWPF.Data
             }
             catch (MySqlException exception)
             {
-                Console.WriteLine(exception.Message);
+                new MessageManager().showError(exception.Message);
             }
         }
 
@@ -74,7 +74,7 @@ namespace TeamToyWPF.Data
             }
             catch (MySqlException exception)
             {
-                Console.WriteLine(exception.Message);
+                new MessageManager().showError(exception.Message);
             }
         }
 
@@ -101,7 +101,7 @@ namespace TeamToyWPF.Data
             }
             catch (MySqlException exception)
             {
-                Console.WriteLine(exception.Message);
+                new MessageManager().showError(exception.Message);
             }
         }
 
@@ -134,7 +134,7 @@ namespace TeamToyWPF.Data
             }
             catch (MySqlException exception)
             {
-                Console.WriteLine(exception.Message);
+                new MessageManager().showError(exception.Message);
             }
         }
 
