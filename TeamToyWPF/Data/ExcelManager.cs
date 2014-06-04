@@ -6,31 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 
-namespace TeamToyTool.Data
+namespace TeamToyWPF.Data
 {
     class ExcelManager
     {
         private const int USER_COLUNM_COUNT = 6;
 
-        private string mFilePath;
+        private DataManager mDataManager;
         private int mMonth;
+        private string mFilePath;
 
         private Application mApplication;
         private Workbook mWorkbook;
         private Worksheet mWorksheet;
 
-        public ExcelManager(DataManager dataManager, int month ,string filePath)
+        public ExcelManager(DataManager dataManager, int month, string filePath)
         {
+            mDataManager = dataManager;
             mMonth = month;
             mFilePath = filePath;
+        }
 
+        public bool execute()
+        {
             mApplication = new Application();
             object Nothing = Missing.Value;
             mWorkbook = mApplication.Workbooks.Open(mFilePath, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing);
             mApplication.DisplayAlerts = false;
             mApplication.AlertBeforeOverwriting = false;
 
-            foreach (User user in dataManager.mUsers)
+            foreach (User user in mDataManager.mUsers)
             {
                 switch (user.name)
                 {
@@ -62,6 +67,8 @@ namespace TeamToyTool.Data
             mWorksheet = null;
             mWorkbook = null;
             mApplication = null;
+
+            return true;
         }
 
         private void saveSheet(User user, int sheetIndex, int userIndex = 0)

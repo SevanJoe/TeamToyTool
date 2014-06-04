@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace TeamToyTool.Data
+namespace TeamToyWPF.Data
 {
 
     class SqlManager
@@ -23,7 +23,12 @@ namespace TeamToyTool.Data
 
         private DataManager mDataManager;
 
-        public SqlManager(int month, string filePath)
+        public SqlManager()
+        {
+            
+        }
+
+        public bool execute(int month, string filePath)
         {
             mDataManager = new DataManager();
 
@@ -33,6 +38,7 @@ namespace TeamToyTool.Data
             getCommentForEachToDo();
 
             ExcelManager excelManager = new ExcelManager(mDataManager, month, filePath);
+            return excelManager.execute();
         }
 
         private void createConnection()
