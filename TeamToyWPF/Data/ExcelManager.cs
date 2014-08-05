@@ -44,6 +44,9 @@ namespace TeamToyWPF.Data
                         case "胡蓉":
                             saveSheet(user, 1);
                             break;
+                        case "朱丽艳":
+                            saveSheet(user, 1, 1);
+                            break;
                         case "杨斌":
                             saveSheet(user, 2);
                             break;

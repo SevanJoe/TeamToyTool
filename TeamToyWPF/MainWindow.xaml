@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TeamToyWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="TeamToy Excel 导出工具" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Loaded="Grid_Loaded">
         <Calendar x:Name="mCalendar" HorizontalAlignment="Left" Margin="50,120,0,0" VerticalAlignment="Top" DisplayMode="Year" DisplayDateChanged="mCalendar_DisplayDateChanged" DisplayModeChanged="mCalendar_DisplayModeChanged" FontSize="16" FontWeight="Bold" PreviewMouseUp="mCalendar_PreviewMouseUp"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,90,0,0" TextWrapping="Wrap" Text="请选择要导出Excel的月份" VerticalAlignment="Top" FontSize="16"/>
