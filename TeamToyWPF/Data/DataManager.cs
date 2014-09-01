@@ -8,7 +8,7 @@ namespace TeamToyWPF.Data
 {
     class DataManager
     {
-        public static readonly List<int> MANAGER_IDS = new List<int> { 2, 6 };
+        public static readonly List<int> MANAGER_IDS = new List<int> { 2, 6, 12 };
 
         public List<User> mUsers { get; set; }
 

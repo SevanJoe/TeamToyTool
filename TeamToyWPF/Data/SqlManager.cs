@@ -16,6 +16,7 @@ namespace TeamToyWPF.Data
         private const string SELECT_USER = "select * from user where id > 1";
         private const string SELECT_TODO_FOR_EACH_USER = "select * from todo where owner_uid = ";
         private const string SELECT_COMMENT_FOR_EACH_TODO = "select * from todo_history where type = 2 and tid = ";
+        private const string SELECT_TODO_STATUS = "select * from todo_user where status = 3 and tid = ";
 
         private MySqlConnection mConnection;
         private MySqlCommand mCommand;
@@ -36,6 +37,7 @@ namespace TeamToyWPF.Data
             getUsers();
             getToDoForEachUser();
             getCommentForEachToDo();
+            checkToDoStatus();
 
             ExcelManager excelManager = new ExcelManager(mDataManager, month, filePath);
             return excelManager.execute();
@@ -55,7 +57,7 @@ namespace TeamToyWPF.Data
             }
         }
 
-        public void getUsers()
+        private void getUsers()
         {
             try
             {
@@ -78,7 +80,7 @@ namespace TeamToyWPF.Data
             }
         }
 
-        public void getToDoForEachUser()
+        private void getToDoForEachUser()
         {
             try
             {
@@ -105,7 +107,7 @@ namespace TeamToyWPF.Data
             }
         }
 
-        public void getCommentForEachToDo()
+        private void getCommentForEachToDo()
         {
             try
             {
@@ -137,6 +139,35 @@ namespace TeamToyWPF.Data
                 new MessageManager().showError(exception.Message);
             }
         }
+
+        private void checkToDoStatus()
+        {
+            try
+            {
+                mConnection.Open();
+                foreach (User user in mDataManager.mUsers)
+                {
+                    foreach (ToDo todo in user.mToDoList)
+                    {
+                        mCommand.CommandText = SELECT_TODO_STATUS + todo.id;
+                        mDataReader = mCommand.ExecuteReader();
+                        todo.isCurrentMonth = false;
+                        todo.isDone = false;
+                        while (mDataReader.Read())
+                        {
+                            todo.isCurrentMonth = true;
+                            todo.isDone = true;
+                        }
+                        mDataReader.Close();
+                    }
+                }
+                mConnection.Close();
+            }
+            catch (MySqlException exception)
+            {
+                new MessageManager().showError(exception.Message);
+            }
+        } 
 
     }
 }

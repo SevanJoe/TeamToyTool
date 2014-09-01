@@ -39,28 +39,34 @@ namespace TeamToyWPF.Data
 
                 foreach (User user in mDataManager.mUsers)
                 {
-                    switch (user.name)
+                    switch (user.id)
                     {
-                        case "胡蓉":
+                        case 7: //"胡蓉"
                             saveSheet(user, 1);
                             break;
-                        case "朱丽艳":
+                        case 11: //"朱丽艳"
                             saveSheet(user, 1, 1);
                             break;
-                        case "杨斌":
+                        case 5: //"杨斌"
                             saveSheet(user, 2);
                             break;
-                        case "焦磊":
+                        case 2: //"焦磊"
                             saveSheet(user, 3);
                             break;
-                        case "黄琛":
+                        case 3: //"黄琛"
                             saveSheet(user, 3, 1);
                             break;
-                        case "胡鹏飞":
+                        case 4: //"胡鹏飞"
                             saveSheet(user, 4);
                             break;
-                        case "刘晓云":
+                        case 8: //"刘晓云"
                             saveSheet(user, 5);
+                            break;
+                        case 12: //"程啸"
+                            saveSheet(user, 3, 2);
+                            break;
+                        case 13: //"王琪"
+                            saveSheet(user, 2, 1);
                             break;
                         default:
                             break;

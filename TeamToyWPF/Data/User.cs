@@ -31,12 +31,16 @@ namespace TeamToyWPF.Data
             List<ToDo> result = new List<ToDo>();
             foreach (ToDo todo in mToDoList)
             {
-                if (todo.isTimeSet)
+                //if (todo.isTimeSet)
+                //{
+                //    if (todo.month == month)
+                //    {
+                //        result.Add(todo);
+                //    }
+                //}
+                if (todo.isCurrentMonth && todo.isDone)
                 {
-                    if (todo.month == month)
-                    {
-                        result.Add(todo);
-                    }
+                    result.Add(todo);
                 }
             }
             return result;

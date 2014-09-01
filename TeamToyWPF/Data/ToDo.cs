@@ -18,6 +18,8 @@ namespace TeamToyWPF.Data
         public bool isTimeSet { get; set; }
         public int month { get; set; }
         public int day { get; set; }
+        public bool isCurrentMonth { get; set; }
+        public bool isDone { get; set; }
 
         public List<Comment> mComments { get; set; }
 
@@ -64,13 +66,14 @@ namespace TeamToyWPF.Data
         public void validateDate()
         {
             Match match = mRegex.Match(content);
-            if(match.Success && content.Substring(0, 1).Equals("["))
+            if (match.Success && content.Substring(0, 1).Equals("["))
             {
                 isTimeSet = true;
                 string dateString = content.Substring(1, content.IndexOf(']') - 1);
                 int indexOfDot = dateString.IndexOf('.');
                 month = int.Parse(dateString.Substring(0, indexOfDot));
-                day = int.Parse(dateString.Substring(indexOfDot + 1, dateString.Length - indexOfDot - 1));
+                int lastIndexOfDot = dateString.LastIndexOf('.');
+                day = int.Parse(dateString.Substring(lastIndexOfDot + 1, dateString.Length - lastIndexOfDot - 1));
             }
         }
 
