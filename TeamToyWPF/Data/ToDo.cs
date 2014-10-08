@@ -69,11 +69,18 @@ namespace TeamToyWPF.Data
             if (match.Success && content.Substring(0, 1).Equals("["))
             {
                 isTimeSet = true;
-                string dateString = content.Substring(1, content.IndexOf(']') - 1);
-                int indexOfDot = dateString.IndexOf('.');
-                month = int.Parse(dateString.Substring(0, indexOfDot));
-                int lastIndexOfDot = dateString.LastIndexOf('.');
-                day = int.Parse(dateString.Substring(lastIndexOfDot + 1, dateString.Length - lastIndexOfDot - 1));
+                try
+                {
+                    string dateString = content.Substring(1, content.IndexOf(']') - 1);
+                    int indexOfDot = dateString.IndexOf('.');
+                    month = int.Parse(dateString.Substring(0, indexOfDot));
+                    int lastIndexOfDot = dateString.LastIndexOf('.');
+                    day = int.Parse(dateString.Substring(lastIndexOfDot + 1, dateString.Length - lastIndexOfDot - 1));
+                }
+                catch (Exception e)
+                {
+                    isTimeSet = false;
+                }
             }
         }
 
