@@ -68,6 +68,12 @@ namespace TeamToyWPF.Data
                         case 13: //"王琪"
                             saveSheet(user, 2, 1);
                             break;
+                        case 14: //"HuJianfeng"
+                            saveSheet(user, 2, 2);
+                            break;
+                        case 15: //"ChangLei"
+                            saveSheet(user, 3, 3);
+                            break;
                         default:
                             break;
                     }
